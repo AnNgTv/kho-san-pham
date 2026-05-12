@@ -1,0 +1,19 @@
+name: MineralWarehouse
+version: 1.0.0
+main: com.anngtv.kho.MineralWarehouse
+description: Virtual mineral warehouse for players
+author: AnNgTv
+
+commands:
+  kho:
+    description: Main command for Mineral Warehouse
+    usage: /kho <open|deposit|reload>
+    aliases: [warehouse, kks]
+
+permissions:
+  mineralwarehouse.use:
+    description: Allow players to use the warehouse
+    default: true
+  mineralwarehouse.admin:
+    description: Admin permissions
+    default: op

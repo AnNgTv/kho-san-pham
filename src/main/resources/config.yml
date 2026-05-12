@@ -1,0 +1,61 @@
+# Mineral Warehouse Configuration
+
+# Minerals that can be stored in the warehouse
+# Format: MATERIAL_NAME:
+#   name: "Display Name"
+#   price: 10.0
+minerals:
+  COAL:
+    name: "Than"
+    price: 10.0
+  IRON_INGOT:
+    name: "Sắt"
+    price: 50.0
+  GOLD_INGOT:
+    name: "Vàng"
+    price: 100.0
+  DIAMOND:
+    name: "Kim Cương"
+    price: 500.0
+  EMERALD:
+    name: "Lục Bảo"
+    price: 1000.0
+  LAPIS_LAZULI:
+    name: "Lapis"
+    price: 30.0
+  QUARTZ:
+    name: "Thạch Anh"
+    price: 40.0
+  REDSTONE:
+    name: "Đá Đỏ"
+    price: 20.0
+
+messages:
+  prefix: "&8[&6Kho Khoáng Sản&8] &r"
+  open-warehouse: "&eĐang mở kho khoáng sản của bạn..."
+  deposit-success: "&aĐã cất &f{amount} {mineral} &avào kho!"
+  withdraw-success: "&aĐã lấy &f{amount} {mineral} &ara khỏi kho!"
+  sell-success: "&aĐã bán &f{amount} {mineral} &anhận được &e{price}$!"
+  sell-all-success: "&aĐã bán toàn bộ khoáng sản nhận được &e{price}$!"
+  not-enough-in-kho: "&cBạn không có đủ {mineral} trong kho!"
+  not-mineral: "&cVật phẩm này không phải là khoáng sản!"
+  inventory-full: "&cTúi đồ của bạn đã đầy!"
+  reload: "&aĐã tải lại cấu hình!"
+  no-permission: "&cBạn không có quyền thực hiện hành động này!"
+  auto-deposit-on: "&eTự động cất khoáng sản: &aBẬT"
+  auto-deposit-off: "&eTự động cất khoáng sản: &cTẮT"
+  deposit-all-success: "&aĐã cất toàn bộ khoáng sản vào kho!"
+  not-online: "&cNgười chơi này không online!"
+  admin-modify-success: "&aĐã cập nhật số lượng {mineral} của {player} thành {amount}!"
+
+gui:
+  title: "&6&lKho Khoáng Sản của {player}"
+  size: 27
+  info-item:
+    material: BOOK
+    name: "&e&lHướng Dẫn"
+    lore:
+      - "&7- Click chuột trái để lấy 64 cái"
+      - "&7- Click chuột phải để lấy 1 cái"
+      - "&7- Shift + Click để lấy toàn bộ"
+      - "&b- Q (Phím vứt) để bán toàn bộ loại này"
