@@ -28,9 +28,28 @@ public class WarehouseManager {
         UUID uuid = player.getUniqueId();
         int amount = item.getAmount();
         long current = plugin.getDatabaseManager().getAmount(uuid, type);
+        long limit = getLimit(type);
+
+        if (current >= limit) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', 
+                    plugin.getConfig().getString("messages.prefix") + "&cKho của bạn đã đầy loại khoáng sản này!"));
+            return;
+        }
+
+        long canAdd = Math.min(amount, limit - current);
+        plugin.getDatabaseManager().setAmount(uuid, type, current + canAdd);
         
-        plugin.getDatabaseManager().setAmount(uuid, type, current + amount);
-        item.setAmount(0);
+        if (canAdd < amount) {
+            item.setAmount(amount - (int)canAdd);
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', 
+                    plugin.getConfig().getString("messages.prefix") + "&cKho đã đầy, chỉ cất được " + canAdd + " cái!"));
+        } else {
+            item.setAmount(0);
+        }
+    }
+
+    public long getLimit(String type) {
+        return plugin.getConfig().getLong("minerals." + type + ".limit", 1000000);
     }
 
     public void depositAll(Player player) {
@@ -115,5 +134,36 @@ public class WarehouseManager {
 
         viewer.getInventory().addItem(item);
         plugin.getDatabaseManager().setAmount(ownerUuid, type, current - amount);
+    }
+
+    public boolean condense(UUID uuid, String mineralType) {
+        long currentAmount = plugin.getDatabaseManager().getAmount(uuid, mineralType);
+        if (currentAmount < 9) return false;
+
+        String blockType;
+        if (mineralType.endsWith("_INGOT")) {
+            blockType = mineralType.replace("_INGOT", "_BLOCK");
+        } else if (mineralType.equals("QUARTZ")) {
+            blockType = "QUARTZ_BLOCK";
+        } else if (mineralType.equals("LAPIS_LAZULI")) {
+            blockType = "LAPIS_BLOCK";
+        } else {
+            blockType = mineralType + "_BLOCK";
+        }
+
+        try {
+            Material.valueOf(blockType);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        long blocksToAdd = currentAmount / 9;
+        long mineralsToRemove = blocksToAdd * 9;
+
+        plugin.getDatabaseManager().setAmount(uuid, mineralType, currentAmount - mineralsToRemove);
+        long currentBlocks = plugin.getDatabaseManager().getAmount(uuid, blockType);
+        plugin.getDatabaseManager().setAmount(uuid, blockType, currentBlocks + blocksToAdd);
+
+        return true;
     }
 }

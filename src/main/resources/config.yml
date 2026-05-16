@@ -8,27 +8,35 @@ minerals:
   COAL:
     name: "Than"
     price: 10.0
+    limit: 100000
   IRON_INGOT:
     name: "Sắt"
     price: 50.0
+    limit: 100000
   GOLD_INGOT:
     name: "Vàng"
     price: 100.0
+    limit: 100000
   DIAMOND:
     name: "Kim Cương"
     price: 500.0
+    limit: 100000
   EMERALD:
     name: "Lục Bảo"
     price: 1000.0
+    limit: 100000
   LAPIS_LAZULI:
     name: "Lapis"
     price: 30.0
+    limit: 100000
   QUARTZ:
     name: "Thạch Anh"
     price: 40.0
+    limit: 100000
   REDSTONE:
     name: "Đá Đỏ"
     price: 20.0
+    limit: 100000
 
 messages:
   prefix: "&8[&6Kho Khoáng Sản&8] &r"
